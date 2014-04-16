@@ -8,7 +8,7 @@
         <config-file target="bar-descriptor.xml" parent="/qnx">
             <!-- see https://developer.blackberry.com/native/documentation/cascades/device_platform/headless_apps/create_headless_app.html#ufa1380035719085 -->
             <asset entryPointId="HeadlessService"
-                type="Qnx/Elf">assets/pushCollectorHeadless</asset>
+                type="Qnx/Elf">assets/pushHeadless</asset>
             <asset entryPointId="HeadlessUI"
                 type="Qnx/Elf">wwe</asset>
 

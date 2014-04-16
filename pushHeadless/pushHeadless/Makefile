@@ -1,4 +1,4 @@
-QMAKE_TARGET  = pushCollectorHeadless
+QMAKE_TARGET  = pushHeadless
 PROJECT_DIR	  := $(dir $(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST)))
 I18N_DIR	  := $(PROJECT_DIR)/translations
 QMAKE = $(QNX_HOST)/usr/bin/qmake
@@ -9,7 +9,7 @@ ifdef NUMBER_OF_PROCESSORS
 	MAKEFLAGS += -j${NUMBER_OF_PROCESSORS}
 endif
 
-default: Device-Release
+default: Device-Debug
 
 .PHONY: FORCE
 
@@ -29,19 +29,19 @@ x86/Makefile: $(QMAKE_TARGET).pro
 
 Device-Release: arm/Makefile translate FORCE
 	$(MAKE) -C ./arm -f Makefile release
-	@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
+	@cp ./arm/o.le-v7-g/pushHeadless ../www/assets/ 2>/dev/null || :
 
 Device-Debug: arm/Makefile translate FORCE
 	$(MAKE) -C ./arm -f Makefile debug
-	@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
+	@cp ./arm/o.le-v7-g/pushHeadless ../www/assets/ 2>/dev/null || :
 
 Device-Profile: arm-p/Makefile translate FORCE
 	$(MAKE) -C ./arm-p -f Makefile debug
-	@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
+	@cp ./arm/o.le-v7-g/pushHeadless ../www/assets/ 2>/dev/null || :
 
 Simulator-Debug: x86/Makefile translate FORCE
 	$(MAKE) -C ./x86 -f Makefile debug
-	@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
+	@cp ./arm/o.le-v7-g/pushHeadless ../www/assets/ 2>/dev/null || :
 
 translate: FORCE
 	$(MAKE) -C $(I18N_DIR) -f Makefile update
