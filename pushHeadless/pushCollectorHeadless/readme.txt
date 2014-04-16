@@ -1,33 +1,29 @@
-Push Collector Headless
+Push Headless
 
-========================================================================
+================================================================================
 Description.
 
-Push Collector Headless is the headless part of the Push Collector
-application. It is responsible for handling all push-related logic,
-including:
-
-- Creating and destroying channels
-- Processing incoming push notifications
-- Adding notifications to the BlackBerry Hub
-- Handling a push transport error
-- Handling a lost connection to the PNS Agent
-- Handling a SIM change
+Push Headless is the headless portion of the Push Headless WebWorks application.
+It's used to register the application for push. By doing registration in the
+headless portion, we can register to receive pushes as soon as it's installed,
+instead of registration when the app is first opened (which for most developers
+isn't soon enough).
 
 The sample code for this application is Open Source under the Apache 2.0 License
 (http://www.apache.org/licenses/LICENSE-2.0.html).
 
-========================================================================
+================================================================================
 Requirements:
 
-BlackBerry 10.2 Native SDK
+BlackBerry 10 WebWorks SDK 2.0
 
-========================================================================
+================================================================================
 Running the example:
 
-The headless application cannot be launched directly by the user. To
-launch it, run the Push Collector application. The Push Collector uses
-the invocation framework to trigger the launching of the headless application.
+The headless application cannot be launched directly by the user. To launch it,
+build and run the Push Headless WebWorks application from the samples.
 
-See the readme for the Push Collector application for instructions on 
-how to build and launch the Push Collector application.
+https://github.com/blackberry-webworks/BB10-WebWorks-Samples
+
+The Push Headless application uses the invocation framework to trigger
+the launching of the headless application.

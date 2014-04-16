@@ -29,19 +29,19 @@ x86/Makefile: $(QMAKE_TARGET).pro
 
 Device-Release: arm/Makefile translate FORCE
 	$(MAKE) -C ./arm -f Makefile release
-@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
+	@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
 
 Device-Debug: arm/Makefile translate FORCE
 	$(MAKE) -C ./arm -f Makefile debug
-@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
+	@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
 
 Device-Profile: arm-p/Makefile translate FORCE
 	$(MAKE) -C ./arm-p -f Makefile debug
-@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
+	@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
 
 Simulator-Debug: x86/Makefile translate FORCE
 	$(MAKE) -C ./x86 -f Makefile debug
-@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
+	@cp ./arm/o.le-v7-g/pushCollectorHeadless ../www/assets/ 2>/dev/null || :
 
 translate: FORCE
 	$(MAKE) -C $(I18N_DIR) -f Makefile update
