@@ -1,9 +1,8 @@
 # Push Headless Sample Application
 
-The Push Headless sample push-enabled application demonstrates how to write a BlackBerry 10 WebWorks application that uses a backend headless service to register for push. This allows registration to be done on app install instead of on-first-run. The webworks portion will receive any pushes.
+The Push Headless sample push-enabled application demonstrates how to write a BlackBerry 10 WebWorks application that uses a backend headless service to register for push. This allows registration to be done on app install instead of on-first-run. The WebWorks portion will receive any pushes.
 
-Consult the [PushService](http://developer.blackberry.com/html5/apis/beta/blackberry.push.pushservice.html) and [PushPayload](http://developer.blackberry.com/html5/apis/beta/blackberry.push.pushpayload.html) classes from the API reference for useful examples and a full description of how to use the
-push APIs.
+Consult the [PushService](http://developer.blackberry.com/html5/apis/beta/blackberry.push.pushservice.html) and [PushPayload](http://developer.blackberry.com/html5/apis/beta/blackberry.push.pushpayload.html) classes from the API reference for useful examples and a full description of how to use the push APIs.
 
 There is also a valuable developer guide on how to write a push-enabled application using BlackBerry WebWorks that you can find [here](https://developer.blackberry.com/html5/documentation/push_service.html).
 
@@ -11,7 +10,7 @@ The developer guide offers the following topics:
 
 1. An overview of push and the Push Service architecture
 2. The requirements for creating a full push solution
-3. How to download, build, and configure the sample application when it's loaded on your BlackBerry 10 device (This is also described below.)
+3. How to download, build and configure the sample application when it's loaded on your BlackBerry 10 device (This is also described below.)
 4. Code samples to help you write your own push application using the BlackBerry 10 WebWorks SDK
 
 The sample code for this application is Open Source under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
@@ -36,7 +35,7 @@ The sample code for this application is Open Source under the [Apache 2.0 Licens
 
 To build the Push Headless sample application:
 
-1. webworks create pushHeadless com.example.pushCollectorUI "Headless Push WebWorks Application" ./*pushHeadlessRepo*/www
+1. webworks create pushHeadless com.example.pushHeadless "Push Headless WebWorks application" ./*pushHeadlessRepo*/www
 2. cd pushHeadless
 3. webworks plugin add com.blackberry.push
 4. webworks plugin add com.blackberry.invoked
@@ -48,7 +47,7 @@ You can now send yourself a push to test that registration was successful.
 
 ## Making changes to the native headless portion
 
-If you want to make changes to the native headless portion of the app, you can optionally copy the pushCollectorHeadless folder into the root of your app (same location as www). This project can then be imported into Momentics. We suggest you import without selecting the "copy into workspace" option as the MakeFile has been setup to overwrite the output binary in the WebWorks app. (./www/assets/pushCollectorHeadless)
+If you want to make changes to the native headless portion of the app, you can optionally copy the pushHeadless folder into the root of your app (same location as www). This project can then be imported into Momentics. We suggest you import without selecting the "copy into workspace" option as the MakeFile has been setup to overwrite the headless binary in the WebWorks app. (./www/assets/pushHeadless)
 
 ## How to send a push
 

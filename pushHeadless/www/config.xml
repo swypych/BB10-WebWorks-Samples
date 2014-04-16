@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.example.pushCollectorUI" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:rim="http://www.blackberry.com/ns/widgets">
-    <name>Headless Push WebWorks Application</name>
-    <author>Your Name</author>
-    <description>A sample headless WebWorks application that registers for push on install natively</description>
+<widget id="com.example.pushHeadless" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:rim="http://www.blackberry.com/ns/widgets">
+    <name>Push Headless WebWorks Application</name>
+    <author email="jkeshavarzi@blackberry.com">James Keshavarzi</author>
+    <description>A sample WebWorks application with a headless component that registers for push notifications on install</description>
     <content src="index.html" />
     <platform name="blackberry10">
         <config-file target="bar-descriptor.xml" parent="/qnx">
@@ -19,9 +19,13 @@
             <entryPoint id="HeadlessService">
                 <name>Headless Service</name>
                 <entryPointType>Qnx/Elf</entryPointType>
+
+                <!-- permissions required for headless portion -->
                 <permission system="true">_sys_run_headless</permission>
                 <permission>read_device_identifying_information</permission>
-                <permission>access_shared</permission>
+
+                <!-- This permission is needed for a consumer (public) push application only (not enterprise push)! Uncomment if doing a consumer push. -->
+                <!--    <permission system="true">_sys_use_consumer_push</permission> -->
             </entryPoint>
 
             <!-- see https://developer.blackberry.com/native/documentation/cascades/device_platform/headless_apps/create_headless_app.html#addinvocationframeworksupportfortriggers -->
@@ -40,7 +44,7 @@
                     <property var="uris" value="headless:"/>
                 </filter>
             </invoke-target>
-            <invoke-target id="com.example.pushCollector.invoke.push">
+            <invoke-target id="com.example.pushHeadless.invoke.push">
                 <invoke-target-type>application</invoke-target-type>
                 <entry-point-id>HeadlessUI</entry-point-id>
                 <filter>

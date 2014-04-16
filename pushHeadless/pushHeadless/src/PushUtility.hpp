@@ -40,7 +40,7 @@
 
 // This needs to match the invoke target specified in bar-descriptor.xml
 // The Invoke target key for receiving new push notifications
-#define INVOKE_TARGET_KEY_PUSH "com.example.pushCollector.invoke.push"
+#define INVOKE_TARGET_KEY_PUSH "com.example.pushHeadless.invoke.push"
 
 /*!
  * Verifies that the QObject::connect result is true. If a slot failed to connect

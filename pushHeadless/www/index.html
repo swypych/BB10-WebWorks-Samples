@@ -23,17 +23,14 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <title>Push Headless Webworks application</title>
     </head>
     <body>
         <div class="app">
-            <h1>BlackBerry WebWorks</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Webworks Ready</p>
+            <h1>Push data will show up below when it's received: </h1>
+            <div class="pushes">
+                <label id="lblPush"></label>
             </div>
-            <p />
-            <label id="lblPush"></label>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

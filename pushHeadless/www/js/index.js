@@ -34,11 +34,9 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         var ops = {
-            invokeTargetId : "com.example.pushCollector.invoke.push",
-            appId : "myAppID"
+            invokeTargetId : "com.example.pushHeadless.invoke.push",
+            appId : "com.example.pushHeadlessAppId"
         };
-
-        app.receivedEvent('deviceready');
 
         //create pushService object to extra push data
         blackberry.push.PushService.create(ops, app.successCreatePushService, app.failCreatePushService);
@@ -67,7 +65,7 @@ var app = {
                 reader.readAsText(pushPayload.data);
                 reader.onloadend = function() {
                     //update label
-                    document.getElementById("lblPush").innerHTML = "Invoked with push: " + reader.result;
+                    document.getElementById("lblPush").innerHTML += "Invoked with push: " + reader.result + "<br />";
                 };
 
                 // If an acknowledgement of the push is required (that is, the push was sent as a confirmed push
@@ -82,16 +80,5 @@ var app = {
                 }
             }
         }
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
     }
 };

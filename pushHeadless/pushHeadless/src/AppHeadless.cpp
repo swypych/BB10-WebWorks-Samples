@@ -70,7 +70,7 @@ void AppHeadless::sendStatus(const QString &status, const QString &message, int 
 
 void AppHeadless::initConfigForBES()
 {
-    m_configuration->setProviderApplicationId("myAppID");
+    m_configuration->setProviderApplicationId("com.example.pushHeadlessAppId");
     m_configuration->setUsingPublicPushProxyGateway(false);
     m_configuration->setLaunchApplicationOnPush(true);
 
