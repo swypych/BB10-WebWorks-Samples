@@ -29,7 +29,7 @@ RegisterService::RegisterService(QObject *parent)
 	m_configuration = Configuration::getInstance();
 
     // Connect to the sslErrors signal in order to see what errors we get when connecting to the push initiator
-	checkConnectResult(connect(&m_accessManager,SIGNAL(sslErrors(QNetworkReply*, const QList<QSslError>& )),
+	Q_ASSERT(connect(&m_accessManager,SIGNAL(sslErrors(QNetworkReply*, const QList<QSslError>& )),
             this, SLOT(onSslErrors(QNetworkReply*, const QList<QSslError>&))));
 }
 
@@ -52,7 +52,7 @@ void RegisterService::subscribeToPushInitiator(const User& user, const QString& 
     m_reply = m_accessManager.get(QNetworkRequest(url));
 
     // Connect to the reply finished signal.
-    checkConnectResult(connect(m_reply, SIGNAL(finished()), this, SLOT(httpFinished())));
+    Q_ASSERT(connect(m_reply, SIGNAL(finished()), this, SLOT(httpFinished())));
 }
 
 void RegisterService::httpFinished()

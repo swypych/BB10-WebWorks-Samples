@@ -19,13 +19,8 @@
 
 #include "Global.hpp"
 
-#define PUSH_COLLECTOR_LAUNCH_CONFIG	 						"launchConfig"
-#define PUSH_COLLECTOR_CREATE_SESSION    						"createSession"
-#define PUSH_COLLECTOR_CREATE_CHANNEL    						"createChannel"
-#define PUSH_COLLECTOR_DESTROY_CHANNEL    						"destroyChannel"
 #define PUSH_COLLECTOR_REGISTER_WITH_PUSH_INITIATOR 			"registerWithPI"
 #define PUSH_COLLECTOR_DEREGISTER_WITH_PUSH_INITIATOR 			"deregisterWithPI"
-#define PUSH_COLLECTOR_SIM_CHANGE					 			"simChange"
 #define PUSH_COLLECTOR_NO_PUSH_SERVICE_CONNECTION				"noPushServiceConnection"
 #define PUSH_COLLECTOR_CREATE_SESSION_COMPLETE 					"createSessionComplete"
 #define PUSH_COLLECTOR_CREATE_CHANNEL_COMPLETE 					"createChannelComplete"
@@ -34,19 +29,6 @@
 #define PUSH_COLLECTOR_DEREGISTER_WITH_PUSH_INITIATOR_COMPLETE 	"deregisterWithPIComplete"
 #define PUSH_COLLECTOR_REGISTER_TO_LAUNCH_COMPLETE 				"registerToLaunchComplete"
 #define PUSH_COLLECTOR_UNREGISTER_FROM_LAUNCH_COMPLETE 			"unregisterFromLaunchComplete"
-#define PUSH_COLLECTOR_SHOW_DIALOG	 							"showDialog"
 #define PUSH_COLLECTOR_SHOW_TOAST	 							"showToast"
-#define PUSH_COLLECTOR_REFRESH_MODEL	 						"refreshModel"
-
-// This needs to match the invoke target specified in bar-descriptor.xml
-// The Invoke target key for receiving new push notifications
-#define INVOKE_TARGET_KEY_PUSH "com.example.pushHeadless.invoke.push"
-
-/*!
- * Verifies that the QObject::connect result is true. If a slot failed to connect
- * to the signal, make sure you know exactly why this has happened. This is not
- * normal, and will cause your app to stop working!!
- */
-PUSHCOLLECTOR_EXPORT void checkConnectResult(bool connectResult);
 
 #endif /* PUSHUTILITY_HPP */

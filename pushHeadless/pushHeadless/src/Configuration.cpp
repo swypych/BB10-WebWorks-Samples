@@ -23,6 +23,17 @@ Configuration::Configuration()
     : m_usingPublicPushProxyGateway(true)
     , m_launchApplicationOnPush(true)
 {
+	//Initialize configuration from config.ini
+	QSettings settings("app/native/assets/config.ini", QSettings::IniFormat);
+	m_providerApplicationId = settings.value("ApplicationId").toString();
+	m_invokeTargetId = settings.value("InvokeTargetId").toString();
+	m_pushInitiatorUrl = settings.value("PushInitiatorUrl").toString();
+	m_user = User();
+	m_user.setUserId(settings.value("PushInitiatorUsername").toString());
+	m_user.setPassword(settings.value("PushInitiatorPassword").toString());
+	m_usingPublicPushProxyGateway = settings.value("UsingPublicPushProxyGateway").toBool();
+	m_ppgUrl = settings.value("PPGUrl").toString();
+	m_launchApplicationOnPush = settings.value("LaunchApplicationOnPush").toBool();
 }
 
 Configuration* Configuration::getInstance()
@@ -50,6 +61,11 @@ QString Configuration::providerApplicationId() const
     return m_providerApplicationId;
 }
 
+QString Configuration::invokeTargetId() const
+{
+    return m_invokeTargetId;
+}
+
 QString Configuration::ppgUrl() const
 {
     return m_ppgUrl;
@@ -65,27 +81,7 @@ bool Configuration::launchApplicationOnPush() const
     return m_launchApplicationOnPush;
 }
 
-void Configuration::setUsingPublicPushProxyGateway(bool usingPublicPushProxyGateway)
+User Configuration::user() const
 {
-    m_usingPublicPushProxyGateway = usingPublicPushProxyGateway;
-}
-
-void Configuration::setProviderApplicationId(const QString& providerApplicationId)
-{
-    m_providerApplicationId = providerApplicationId;
-}
-
-void Configuration::setPpgUrl(const QString& ppgUrl)
-{
-    m_ppgUrl = ppgUrl;
-}
-
-void Configuration::setPushInitiatorUrl(const QString& pushInitiatorUrl)
-{
-    m_pushInitiatorUrl = pushInitiatorUrl;
-}
-
-void Configuration::setLaunchApplicationOnPush(bool launchApplicationOnPush)
-{
-    m_launchApplicationOnPush = launchApplicationOnPush;
+	return m_user;
 }

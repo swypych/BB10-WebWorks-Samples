@@ -4,84 +4,84 @@
 <context>
     <name>AppHeadless</name>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="115"/>
+        <location filename="../src/AppHeadless.cpp" line="73"/>
         <source>Push Service successfully reconnected to the Push Agent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="117"/>
+        <location filename="../src/AppHeadless.cpp" line="75"/>
         <source>Error: Push Service could not reconnect to the Push Agent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="144"/>
+        <location filename="../src/AppHeadless.cpp" line="102"/>
         <source>Create channel failed with error code: %0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="151"/>
+        <location filename="../src/AppHeadless.cpp" line="109"/>
         <source>Subscribing to Push Initiator...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="160"/>
-        <location filename="../src/AppHeadless.cpp" line="181"/>
+        <location filename="../src/AppHeadless.cpp" line="118"/>
+        <location filename="../src/AppHeadless.cpp" line="139"/>
         <source>Register succeeded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="164"/>
+        <location filename="../src/AppHeadless.cpp" line="122"/>
         <source>Create channel failed as the push transport is unavailable. Verify your mobile network and/or Wi-Fi are turned on. If they are on, you will be notified when the push transport is available again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="169"/>
+        <location filename="../src/AppHeadless.cpp" line="127"/>
         <source>Create channel failed as the PPG is currently returning a server error. You will be notified when the PPG is available again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="184"/>
+        <location filename="../src/AppHeadless.cpp" line="142"/>
         <source>Subscribe to the Push Initiator failed with error code: %0. Reason: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="195"/>
+        <location filename="../src/AppHeadless.cpp" line="153"/>
         <source>Destroy channel failed with error code: %0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="202"/>
+        <location filename="../src/AppHeadless.cpp" line="160"/>
         <source>Unsubscribing from Push Initiator...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="209"/>
-        <location filename="../src/AppHeadless.cpp" line="230"/>
+        <location filename="../src/AppHeadless.cpp" line="167"/>
+        <location filename="../src/AppHeadless.cpp" line="188"/>
         <source>Unregister succeeded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="213"/>
+        <location filename="../src/AppHeadless.cpp" line="171"/>
         <source>Destroy channel failed as the push transport is unavailable. Verify your mobile network and/or Wi-Fi are turned on. If they are on, you will be notified when the push transport is available again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="218"/>
+        <location filename="../src/AppHeadless.cpp" line="176"/>
         <source>Destroy channel failed as the PPG is currently returning a server error. You will be notified when the PPG is available again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="233"/>
+        <location filename="../src/AppHeadless.cpp" line="191"/>
         <source>Unsubscribe from the Push Initiator failed with error code: %0. Reason: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="243"/>
+        <location filename="../src/AppHeadless.cpp" line="201"/>
         <source>Register to launch failed with error code: %0.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppHeadless.cpp" line="252"/>
+        <location filename="../src/AppHeadless.cpp" line="210"/>
         <source>Unregister from launch failed with error code: %0.</source>
         <translation type="unfinished"></translation>
     </message>

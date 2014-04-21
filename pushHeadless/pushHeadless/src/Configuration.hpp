@@ -18,8 +18,10 @@
 #define CONFIGURATION_HPP
 
 #include "Global.hpp"
+#include "User.hpp"
 
 #include <QString>
+#include <QSettings>
 
 /*!
  * Value object relating to configuration settings for the push application.
@@ -39,15 +41,11 @@ public:
 
     bool usingPublicPushProxyGateway() const;
     QString providerApplicationId() const;
+    QString invokeTargetId() const;
     QString ppgUrl() const;
     QString pushInitiatorUrl() const;
     bool launchApplicationOnPush() const;
-
-    void setUsingPublicPushProxyGateway(bool usingPublicPushProxyGateway);
-    void setProviderApplicationId(const QString& providerApplicationId);
-    void setPpgUrl(const QString& ppgUrl);
-    void setPushInitiatorUrl(const QString& pushInitiatorUrl);
-    void setLaunchApplicationOnPush(bool launchApplicationOnPush);
+    User user() const;
 
 private:
     static bool instanceFlag;
@@ -65,6 +63,10 @@ private:
     // If writing an enterprise application and you are not using the Push Service SDK, this will be null.
     QString m_providerApplicationId;
 
+    // This needs to match the invoke target specified in bar-descriptor.xml
+    // The Invoke target key for receiving new push notifications
+    QString m_invokeTargetId;
+
     // This matches the URL used to register with / unregister from the BlackBerry Push Service (BIS) PPG.
     // For eval, this would be http://cp<cpid>.pushapi.eval.blackberry.com.
     // For production, this would be http://cp<cpid>.pushapi.na.blackberry.com
@@ -80,6 +82,8 @@ private:
     // It will launch if the application has been registered to launch
     // The default behaviour is not to launch.
     bool m_launchApplicationOnPush;
+
+    User m_user;
 };
 
 #endif

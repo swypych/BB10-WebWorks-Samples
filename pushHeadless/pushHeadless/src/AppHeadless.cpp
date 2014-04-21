@@ -21,40 +21,33 @@ using namespace bb::network;
 
     AppHeadless::AppHeadless()
     : m_pushNotificationService(new PushNotificationService(this))
-    , m_shouldRegisterToLaunch(false)
-      , m_shouldUnregisterFromLaunch(false)
 {
     m_configuration = Configuration::getInstance();
 
-    // By default we initialize the config using settings for a BES push.
-    // If doing a BIS push, comment out the initConfigForBES call in favour of the initConfigForBIS call.
-    // Don't forget to verify your settings in the below two calls.
-    initConfigForBES();
-    //	initConfigForBIS();
-
     // connect the push notification service signals and slots
-    checkConnectResult(QObject::connect(m_pushNotificationService, SIGNAL(createSessionCompleted(const bb::network::PushStatus&)),
+    Q_ASSERT(QObject::connect(m_pushNotificationService, SIGNAL(createSessionCompleted(const bb::network::PushStatus&)),
                 this, SLOT(onCreateSessionCompleted(const bb::network::PushStatus&))));
-    checkConnectResult(QObject::connect(m_pushNotificationService, SIGNAL(createChannelCompleted(const bb::network::PushStatus&, const QString)),
+    Q_ASSERT(QObject::connect(m_pushNotificationService, SIGNAL(createChannelCompleted(const bb::network::PushStatus&, const QString)),
                 this, SLOT(onCreateChannelCompleted(const bb::network::PushStatus&, const QString))));
-    checkConnectResult(QObject::connect(m_pushNotificationService, SIGNAL(destroyChannelCompleted(const bb::network::PushStatus&)),
+    Q_ASSERT(QObject::connect(m_pushNotificationService, SIGNAL(destroyChannelCompleted(const bb::network::PushStatus&)),
                 this, SLOT(onDestroyChannelCompleted(const bb::network::PushStatus&))));
-    checkConnectResult(QObject::connect(m_pushNotificationService, SIGNAL(registerToLaunchCompleted(const bb::network::PushStatus&)),
+    Q_ASSERT(QObject::connect(m_pushNotificationService, SIGNAL(registerToLaunchCompleted(const bb::network::PushStatus&)),
                 this, SLOT(onRegisterToLaunchCompleted(const bb::network::PushStatus&))));
-    checkConnectResult(QObject::connect(m_pushNotificationService, SIGNAL(unregisterFromLaunchCompleted(const bb::network::PushStatus&)),
+    Q_ASSERT(QObject::connect(m_pushNotificationService, SIGNAL(unregisterFromLaunchCompleted(const bb::network::PushStatus&)),
                 this, SLOT(onUnregisterFromLaunchCompleted(const bb::network::PushStatus&))));
-    checkConnectResult(QObject::connect(m_pushNotificationService, SIGNAL(piRegistrationCompleted(int, const QString)),
+    Q_ASSERT(QObject::connect(m_pushNotificationService, SIGNAL(piRegistrationCompleted(int, const QString)),
                 this, SLOT(onPIRegistrationCompleted(int, const QString))));
-    checkConnectResult(QObject::connect(m_pushNotificationService, SIGNAL(piDeregistrationCompleted(int, const QString)),
+    Q_ASSERT(QObject::connect(m_pushNotificationService, SIGNAL(piDeregistrationCompleted(int, const QString)),
                 this, SLOT(onPIDeregistrationCompleted(int, const QString))));
-    checkConnectResult(QObject::connect(m_pushNotificationService, SIGNAL(pushTransportReady(bb::network::PushCommand::Type)),
+    Q_ASSERT(QObject::connect(m_pushNotificationService, SIGNAL(pushTransportReady(bb::network::PushCommand::Type)),
                 this, SLOT(onPushTransportReady(bb::network::PushCommand::Type))));
-    checkConnectResult(QObject::connect(m_pushNotificationService, SIGNAL(noPushServiceConnection()),
+    Q_ASSERT(QObject::connect(m_pushNotificationService, SIGNAL(noPushServiceConnection()),
                 this, SLOT(onNoPushServiceConnection())));
-    checkConnectResult(QObject::connect(m_pushNotificationService, SIGNAL(pushAgentConnectionStatusChanged(bool)),
+    Q_ASSERT(QObject::connect(m_pushNotificationService, SIGNAL(pushAgentConnectionStatusChanged(bool)),
                 this, SLOT(onPushAgentConnectionStatusChanged(bool))));
 
-    registerApp();
+    m_pushNotificationService->createSession();
+    m_pushNotificationService->createChannel();
 }
 
 AppHeadless::~AppHeadless()
@@ -64,43 +57,8 @@ AppHeadless::~AppHeadless()
 void AppHeadless::sendStatus(const QString &status, const QString &message, int code)
 {
     //This sample will simply send a status to the console, but this can be changed
-    //to send to the UI via a text file in the share or websockets.
+    //to send to the UI via a text file in the app sandbox.
     qDebug() << status << message << code;
-}
-
-void AppHeadless::initConfigForBES()
-{
-    m_configuration->setProviderApplicationId("com.example.pushHeadlessAppId");
-    m_configuration->setUsingPublicPushProxyGateway(false);
-    m_configuration->setLaunchApplicationOnPush(true);
-
-    //for registering with push initiator
-    //	m_configuration->setPushInitiatorUrl("http://something");
-    //	m_user = User();
-    //	m_user.setUserId("username");
-    //	m_user.setPassword("password");
-}
-
-void AppHeadless::initConfigForBIS()
-{
-    m_configuration->setProviderApplicationId("@@@@-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    m_configuration->setPpgUrl("http://cp@@@@.pushapi.eval.blackberry.com");
-    m_configuration->setUsingPublicPushProxyGateway(true);
-    m_configuration->setLaunchApplicationOnPush(true);
-
-    //for registering with push initiator
-    //	m_configuration->setPushInitiatorUrl("http://something");
-    //	m_user = User();
-    //	m_user.setUserId("username");
-    //	m_user.setPassword("password");
-}
-
-void AppHeadless::registerApp()
-{
-    m_shouldRegisterToLaunch = m_configuration->launchApplicationOnPush();
-    m_shouldUnregisterFromLaunch = !m_configuration->launchApplicationOnPush();
-    m_pushNotificationService->createSession();
-    m_pushNotificationService->createChannel();
 }
 
 void AppHeadless::onNoPushServiceConnection()
@@ -125,9 +83,9 @@ void AppHeadless::onCreateSessionCompleted(const bb::network::PushStatus &status
 
     QString message;
     if (status.code() == PushErrorCode::NoError) {
-        if (m_shouldRegisterToLaunch) {
+        if (m_configuration->launchApplicationOnPush()) {
             m_pushNotificationService->registerToLaunch();
-        } else if (m_shouldUnregisterFromLaunch) {
+        } else {
             m_pushNotificationService->unregisterFromLaunch();
         }
     }
@@ -149,12 +107,12 @@ void AppHeadless::onCreateChannelCompleted(const bb::network::PushStatus &status
             if (!m_configuration->pushInitiatorUrl().isEmpty()) {
                 // Now, attempt to subscribe to the Push Initiator
                 message = tr("Subscribing to Push Initiator...");
-                sendStatus("", message, status.code());
+                sendStatus(PUSH_COLLECTOR_REGISTER_WITH_PUSH_INITIATOR, message, status.code());
 
                 // This is very important: the token returned in the create channel success event is what
                 // the Push Initiator should use when initiating a push to the BlackBerry Push Service.
                 // This token must be communicated back to the Push Initiator's server-side application.
-                m_pushNotificationService->subscribeToPushInitiator(m_user, token);
+                m_pushNotificationService->subscribeToPushInitiator(m_configuration->user(), token);
                 return;
             } else {
                 message = tr("Register succeeded.");
@@ -203,7 +161,7 @@ void AppHeadless::onDestroyChannelCompleted(const bb::network::PushStatus &statu
                 sendStatus(PUSH_COLLECTOR_DEREGISTER_WITH_PUSH_INITIATOR, message, status.code());
 
                 // Now, attempt to unsubscribe from the Push Initiator
-                m_pushNotificationService->unsubscribeFromPushInitiator(m_user);
+                m_pushNotificationService->unsubscribeFromPushInitiator(m_configuration->user());
                 return;
             } else {
                 message = tr("Unregister succeeded.");

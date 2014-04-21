@@ -38,7 +38,7 @@ var app = {
             appId : "com.example.pushHeadlessAppId"
         };
 
-        //create pushService object to extra push data
+        //create pushService object to extract push data
         blackberry.push.PushService.create(ops, app.successCreatePushService, app.failCreatePushService);
     },
     // success callback called when push service object created

@@ -30,7 +30,7 @@ PushNotificationService::PushNotificationService(QObject *parent)
     , m_retryTime(INITIAL_WAIT_TIME_MILLISECONDS)
 {
 	m_configuration = Configuration::getInstance();
-	checkConnectResult(QObject::connect(m_timer, SIGNAL(timeout()), this, SLOT(onConnectionClosed())));
+	Q_ASSERT(QObject::connect(m_timer, SIGNAL(timeout()), this, SLOT(onConnectionClosed())));
 }
 
 void PushNotificationService::createSession()
@@ -48,26 +48,26 @@ void PushNotificationService::createChannel()
 void PushNotificationService::initializePushService()
 {
     if (!m_pushService) {
-        m_pushService = new PushService(m_configuration->providerApplicationId(), INVOKE_TARGET_KEY_PUSH, this);
+        m_pushService = new PushService(m_configuration->providerApplicationId(), m_configuration->invokeTargetId(), this);
 
         //Connect the signals
-        checkConnectResult(QObject::connect(m_pushService, SIGNAL(createSessionCompleted(const bb::network::PushStatus&)),
+        Q_ASSERT(QObject::connect(m_pushService, SIGNAL(createSessionCompleted(const bb::network::PushStatus&)),
                 this, SIGNAL(createSessionCompleted(const bb::network::PushStatus&))));
-        checkConnectResult(QObject::connect(m_pushService, SIGNAL(createChannelCompleted(const bb::network::PushStatus&, const QString)),
+        Q_ASSERT(QObject::connect(m_pushService, SIGNAL(createChannelCompleted(const bb::network::PushStatus&, const QString)),
                 this, SIGNAL(createChannelCompleted(const bb::network::PushStatus&, const QString))));
-        checkConnectResult(QObject::connect(m_pushService, SIGNAL(destroyChannelCompleted(const bb::network::PushStatus&)),
+        Q_ASSERT(QObject::connect(m_pushService, SIGNAL(destroyChannelCompleted(const bb::network::PushStatus&)),
                 this, SIGNAL(destroyChannelCompleted(const bb::network::PushStatus&))));
-        checkConnectResult(QObject::connect(m_pushService, SIGNAL(registerToLaunchCompleted(const bb::network::PushStatus&)),
+        Q_ASSERT(QObject::connect(m_pushService, SIGNAL(registerToLaunchCompleted(const bb::network::PushStatus&)),
                 this, SIGNAL(registerToLaunchCompleted(const bb::network::PushStatus&))));
-        checkConnectResult(QObject::connect(m_pushService, SIGNAL(unregisterFromLaunchCompleted(const bb::network::PushStatus&)),
+        Q_ASSERT(QObject::connect(m_pushService, SIGNAL(unregisterFromLaunchCompleted(const bb::network::PushStatus&)),
                 this, SIGNAL(unregisterFromLaunchCompleted(const bb::network::PushStatus&))));
-        checkConnectResult(QObject::connect(m_pushService, SIGNAL(pushTransportReady(bb::network::PushCommand::Type)),
+        Q_ASSERT(QObject::connect(m_pushService, SIGNAL(pushTransportReady(bb::network::PushCommand::Type)),
                 this, SIGNAL(pushTransportReady(bb::network::PushCommand::Type))));
-        checkConnectResult(QObject::connect(m_pushService, SIGNAL(connectionClosed()),
+        Q_ASSERT(QObject::connect(m_pushService, SIGNAL(connectionClosed()),
                 this, SLOT(onConnectionClosed())));
-        checkConnectResult(QObject::connect(&m_registerService, SIGNAL(piRegistrationCompleted(int, const QString)),
+        Q_ASSERT(QObject::connect(&m_registerService, SIGNAL(piRegistrationCompleted(int, const QString)),
                 this, SIGNAL(piRegistrationCompleted(int, const QString))));
-        checkConnectResult(QObject::connect(&m_unregisterService, SIGNAL(piDeregistrationCompleted(int, const QString)),
+        Q_ASSERT(QObject::connect(&m_unregisterService, SIGNAL(piDeregistrationCompleted(int, const QString)),
                 this, SIGNAL(piDeregistrationCompleted(int, const QString))));
     }
 }
