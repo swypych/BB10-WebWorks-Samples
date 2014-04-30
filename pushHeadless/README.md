@@ -20,9 +20,6 @@ The sample code for this application is Open Source under the [Apache 2.0 Licens
 
 * [BlackBerry 10 WebWorks 2.0 SDK](https://developer.blackberry.com/html5/download/sdk)
 
-**Port to WebWorks 2.0**
-* [Luca Sale](https://github.com/lsale)
-
 **Author(s)**
 * [James Keshavarzi](https://github.com/jkeshavarzi)
 
@@ -30,12 +27,13 @@ The sample code for this application is Open Source under the [Apache 2.0 Licens
 
 **To contribute code to this repository you must be [signed up as an official contributor](http://blackberry.github.com/howToContribute.html).**
 
-
 ## How to Build
+
+*Note: This sample is configured by default for a BES push. If doing a consumer (public) push, update the ./www/assets/config.ini file*
 
 To build the Push Headless sample application:
 
-1. webworks create pushHeadless com.example.pushHeadless "Push Headless WebWorks application" ./*pushHeadlessRepo*/www
+1. webworks create pushHeadless com.example.pushHeadless "Push Headless WebWorks application" *pushHeadlessRepoPath*/www
 2. cd pushHeadless
 3. webworks plugin add com.blackberry.push
 4. webworks plugin add com.blackberry.invoked
@@ -43,7 +41,7 @@ To build the Push Headless sample application:
 
 You can now send yourself a push to test that registration was successful.
 
-*if using BES for push, ensure you are on the work perimeter*
+*if using BES for push, ensure you are deploying to the work perimeter*
 
 ## Making changes to the native headless portion
 
@@ -58,6 +56,14 @@ You'll find all the documentation for the Push Service SDK [here](http://develop
 The low-level API reference for the Push Service SDK can be found [here](http://www.blackberry.com/developers/docs/PushServiceSDK1.2/LowLevelAPI).
 The high-level API reference for the Push Service SDK can be found [here](http://www.blackberry.com/developers/docs/PushServiceSDK1.2/HighLevelAPI).
 
+If doing a BES push, you can additional try [this](https://github.com/blackberry/BES10-WebWorks/tree/master/SimplePushTest/server) as an initiator.
+Simply host the index.html file on a web server and note the below definitions for each field.
+
+Destination Email: The BES email address associated with the device you are pushing content to (i.e myEmail@myDomain.net).
+BES Address: The BES address (i.e bes123.myDomain.net).
+MDS-CS Listen Port: The Mobile Data Server listen port (Usually 9080).
+Application Listen Port: The appId used when registering for push. This should match what you specified in the config.ini file. For BES pushes, if nothing was specified, one will be randomly generated for you. It's recommended you specifiy an appId (i.e com.example.pushHeadlessAppId).
+Content to Push: The push data to send (i.e Sending some sample test data).
 
 ## More Info
 
